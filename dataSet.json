@@ -1,0 +1,30 @@
+[
+    {
+        "APIKey": "APIKEY",
+        "lat": "44.34",
+        "lon": "10.99",
+        "latInc": "lala2",
+        "lonInc": "lala2",
+        "city": "Islington",
+        "noIsCity": "Mandarina"
+},
+    {
+        "APIKey": "APIKEY",
+        "lat": "24.34",
+        "lon": "10.99",
+        "latInc": 91,
+        "lonInc": -191,
+        "city": "London",
+        "noIsCity": "Bamanas"
+},
+{
+    "APIKey": "APIKEY",
+    "lat": "90.00",
+    "lon": "-180.00",
+    "latInc": -91,
+    "lonInc": -181,
+    "city": "Italia",
+    "noIsCity": "rollerCoaster"
+}
+]
+

@@ -1,0 +1,742 @@
+{
+	"info": {
+		"_postman_id": "7cfecc5f-e752-437c-aec9-864fbad5bb91",
+		"name": "weatherAPI",
+		"description": "Automated script for OpendWeatherAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1079556"
+	},
+	"item": [
+		{
+			"name": "Getting weather by geo coord",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the structure of the response JSON\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.coord).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.weather).to.exist.and.to.be.an('array');\r",
+							"    pm.expect(responseData.base).to.exist.and.to.be.a('string');\r",
+							"    pm.expect(responseData.main).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.visibility).to.exist.and.to.be.a('number');\r",
+							"    pm.expect(responseData.wind).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.clouds).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.dt).to.exist.and.to.be.a('number');\r",
+							"    pm.expect(responseData.sys).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.timezone).to.exist.and.to.be.a('number');\r",
+							"    pm.expect(responseData.id).to.exist.and.to.be.a('number');\r",
+							"    pm.expect(responseData.name).to.exist.and.to.be.a('string');\r",
+							"    pm.expect(responseData.cod).to.exist.and.to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response content type is JSON\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\", 'application/json; charset=utf-8');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Coord field should exist and be an object\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.coord).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Weather field should exist and be an array\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.weather).to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Base field should exist and be a string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.base).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Main field should exist and be an object\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.main).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Visibility field should exist and be a number\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.visibility).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Wind field should exist and be an object\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.wind).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Clouds field should exist and be an object\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.clouds).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Dt field should exist and be a number\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.dt).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Sys field should exist and be an object\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.sys).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Timezone field should exist and be a number\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.timezone).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Id field should exist and be a number\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.id).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name field should exist and be a string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.name).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Cod field should exist and be a number\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.cod).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Weather array contains at least one element\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.weather).to.be.an('array').that.is.not.empty;\r",
+							"    \r",
+							"    responseData.weather.forEach(function(weatherItem) {\r",
+							"        pm.expect(weatherItem).to.have.property('id');\r",
+							"        pm.expect(weatherItem).to.have.property('main');\r",
+							"        pm.expect(weatherItem).to.have.property('description');\r",
+							"        pm.expect(weatherItem).to.have.property('icon');\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// pm.environment.set(\"lat\", 34,35);\r",
+							"// pm.environment.set(\"lon\",58,22);\r",
+							"/*Imput to validate happy path name:Islington*/\r",
+							"pm.environment.set(\"lat\", 51.547);\r",
+							"pm.environment.set(\"lon\",-0.1094);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?lat={{lat}}&lon={{lon}}&appid={{APIKey}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "{{lat}}"
+						},
+						{
+							"key": "lon",
+							"value": "{{lon}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting weather-wrong latitude",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"    console.log('paso por aquí');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has the required fields - cod and message\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.have.property('cod');\r",
+							"    pm.expect(responseData).to.have.property('message');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 600ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(600);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate response schema\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.cod).to.be.a('string');\r",
+							"    pm.expect(responseData.message).to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response string:wrong latitude\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('wrong latitude');\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?lat={{latInc}}&lon={{lon}}&appid={{APIKey}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "{{latInc}}"
+						},
+						{
+							"key": "lon",
+							"value": "{{lon}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting weather-wrong lon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test to validate the message for wrong longitude\r",
+							"pm.test(\"Validate the message for wrong longitude\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('wrong longitude');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - cod and message\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.have.property('cod');\r",
+							"    pm.expect(responseData).to.have.property('message');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Cod is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.cod).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"\r",
+							"  pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// pm.environment.set(\"lat\", 34,35);\r",
+							"// pm.environment.set(\"lon\",58,22);\r",
+							"\r",
+							"pm.environment.set(\"lat\", 34,35 );\r",
+							"pm.environment.set(\"lon\",\"arpa\");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?lat={{lat}}&lon={{lonInc}}&appid={{APIKey}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "{{lat}}"
+						},
+						{
+							"key": "lon",
+							"value": "{{lonInc}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting weather by city name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 600ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(600);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the structure of the response JSON\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.coord).to.be.an('object');\r",
+							"    pm.expect(responseData.weather).to.be.an('array');\r",
+							"    pm.expect(responseData.base).to.be.a('string');\r",
+							"    pm.expect(responseData.main).to.be.an('object');\r",
+							"    pm.expect(responseData.visibility).to.be.a('number');\r",
+							"    pm.expect(responseData.wind).to.be.an('object');\r",
+							"    pm.expect(responseData.clouds).to.be.an('object');\r",
+							"    pm.expect(responseData.dt).to.be.a('number');\r",
+							"    pm.expect(responseData.sys).to.be.an('object');\r",
+							"    pm.expect(responseData.timezone).to.be.a('number');\r",
+							"    pm.expect(responseData.id).to.be.a('number');\r",
+							"    pm.expect(responseData.name).to.be.a('string');\r",
+							"    pm.expect(responseData.cod).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Weather array contains the expected number of elements\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.weather).to.be.an('array').and.to.have.lengthOf(1);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?q={{city}}&appid={{APIKey}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting weather by wrong city name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(404);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Presence of cod and message fields in the response\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.have.property('cod');\r",
+							"    pm.expect(responseData).to.have.property('message');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify Content-Type is application/json\", function () {\r",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify the handling of invalid city names\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.cod).to.exist.and.to.be.a('string');\r",
+							"    pm.expect(responseData.message).to.exist.and.to.be.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate response string:city not found\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include('city not found');\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// pm.environment.set(\"lat\", 34,35);\r",
+							"// pm.environment.set(\"lon\",58,22);\r",
+							"\r",
+							"pm.environment.set(\"lat\", 34,35 );\r",
+							"pm.environment.set(\"lon\",\"arpa\");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?q={{noIsCity}}&appid={{APIKey}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{noIsCity}}"
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting a city called true",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// pm.environment.set(\"lat\", 34,35);\r",
+							"// pm.environment.set(\"lon\",58,22);\r",
+							"\r",
+							"pm.environment.set(\"lat\", 34,35 );\r",
+							"pm.environment.set(\"lon\",\"arpa\");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?q=true&appid={{APIKey}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "true"
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting a city in xml",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response content type is application/xml\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/xml\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the current weather object\", function () {\r",
+							"    const responseData = xml2Json(pm.response.text());\r",
+							"\r",
+							"    pm.expect(responseData).to.have.property('current');\r",
+							"    pm.expect(responseData.current).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Temperature object should exist and have required properties\", function () {\r",
+							"    const responseData = xml2Json(pm.response.text());\r",
+							"\r",
+							"    pm.expect(responseData).to.have.property('current');\r",
+							"    pm.expect(responseData.current).to.have.property('temperature');\r",
+							"    pm.expect(responseData.current.temperature).to.have.property('$');\r",
+							"    pm.expect(responseData.current.temperature.$).to.have.property('value');\r",
+							"    pm.expect(responseData.current.temperature.$).to.have.property('min');\r",
+							"    pm.expect(responseData.current.temperature.$).to.have.property('max');\r",
+							"    pm.expect(responseData.current.temperature.$).to.have.property('unit');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the wind object\", function () {\r",
+							"    const responseData = xml2Json(pm.response.text());\r",
+							"\r",
+							"    pm.expect(responseData.current.wind).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.current.wind.speed).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.current.wind.direction).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.current.wind.gusts).to.exist;\r",
+							"    pm.expect(responseData.current.wind.speed.$).to.exist.and.to.be.an('object');\r",
+							"    pm.expect(responseData.current.wind.direction.$).to.exist.and.to.be.an('object');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// pm.environment.set(\"lat\", 34,35);\r",
+							"// pm.environment.set(\"lon\",58,22);\r",
+							"\r",
+							"pm.environment.set(\"lat\", 34,35 );\r",
+							"pm.environment.set(\"lon\",\"arpa\");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.openweathermap.org/data/2.5/weather?q={{city}}&mode=xml&appid={{APIKey}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{city}}"
+						},
+						{
+							"key": "mode",
+							"value": "xml"
+						},
+						{
+							"key": "appid",
+							"value": "{{APIKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
