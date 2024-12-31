@@ -92,4 +92,4 @@ The automation strategy is to use postman + newman + Jenkins because Postman is 
 ![alt text](image.png)
 
 ## loom video with explanation
-https://www.loom.com/share/167291ec194347488288aba86916fa9a?sid=c070ac03-cb75-4484-8771-11a94db59d3a
+[https://www.loom.com/share/167291ec194347488288aba86916fa9a?sid=c070ac03-cb75-4484-8771-11a94db59d3a](https://www.loom.com/share/6c25d85f4dab4a8d8516cfff42faf4cf?sid=350ee46b-f723-4f97-9f75-7d4fc3de7d5d)
